@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stark Industries | Orbital Satellite Server</title>
+    <style>
+        body { 
+            background-color: #050505; color: #00f2ff; 
+            font-family: 'Segoe UI', sans-serif; margin: 0; overflow: hidden;
+        }
+        .header { 
+            background: rgba(0, 242, 255, 0.1); padding: 15px; 
+            text-align: center; border-bottom: 2px solid #00f2ff;
+            letter-spacing: 5px; font-weight: bold;
+        }
+        #container { display: flex; height: 80vh; }
+        #telemetry { 
+            width: 30%; padding: 20px; border-right: 1px solid #00f2ff;
+            background: rgba(0,0,0,0.8);
+        }
+        #map-display { width: 70%; background: #111; position: relative; }
+        .data-point { margin-bottom: 20px; border-left: 3px solid #00f2ff; padding-left: 10px; }
+        .glow-text { text-shadow: 0 0 10px #00f2ff; }
+        .loading-bar { 
+            width: 100%; height: 4px; background: #222; margin-top: 10px;
+        }
+        .loading-fill { 
+            width: 75%; height: 100%; background: #00f2ff; 
+            box-shadow: 0 0 15px #00f2ff; animation: load 2s infinite;
+        }
+        @keyframes load { 0% { width: 10%; } 100% { width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="header">STARK INDUSTRIES - GLOBAL SATELLITE NETWORK (ORBITAL-1)</div>
+    
+    <div id="container">
+        <div id="telemetry">
+            <h3 class="glow-text">LIVE TELEMETRY</h3>
+            <div class="data-point">
+                <div>SATELLITE ID: STARK-SAT-01</div>
+                <div class="loading-bar"><div class="loading-fill"></div></div>
+            </div>
+            <div class="data-point">
+                <div>ALTITUDE: <span id="alt">408.2</span> km</div>
+            </div>
+            <div class="data-point">
+                <div>VELOCITY: <span id="vel">27,580</span> km/h</div>
+            </div>
+            <div class="data-point">
+                <div>SIGNAL STRENGTH: <span style="color:#0f0">98% (ENCRYPTED)</span></div>
+            </div>
+        </div>
+        
+        <div id="map-display">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                <div style="width: 300px; height: 300px; border: 2px dashed #00f2ff; border-radius: 50%; animation: spin 10s linear infinite;"></div>
+                <p style="text-align: center; margin-top: 20px;">SCANNING EARTH SECTOR 7-G...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Real-time randomness for data simulation
+        setInterval(() => {
+            document.getElementById('alt').innerText = (408 + Math.random()).toFixed(2);
+            document.getElementById('vel').innerText = (27580 + Math.random() * 10).toFixed(0);
+        }, 3000);
+    </script>
+    <style>@keyframes spin { 100% { transform: translate(-50%, -50%) rotate(360deg); } }</style>
+</body>
+</html>
