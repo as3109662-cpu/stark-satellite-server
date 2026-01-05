@@ -1,47 +1,43 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// OpenSearch XML - Isse Chrome aapka engine pehchanega
-app.get('/opensearch.xml', (req, res) => {
-    res.set('Content-Type', 'application/opensearchdescription+xml');
-    res.send(`<?xml version="1.0" encoding="UTF-8"?>
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-  <ShortName>Stark Search</ShortName>
-  <Description>Stark Industries Satellite Search</Description>
-  <InputEncoding>UTF-8</InputEncoding>
-  <Url type="text/html" template="https://stark-satellite-server.onrender.com/search?q={searchTerms}"/>
-</OpenSearchDescription>`);
+// Manifest file serve karna
+app.get('/manifest.json', (req, res) => {
+    res.sendFile(path.join(__dirname, 'manifest.json'));
 });
 
 app.get('/', (req, res) => {
     res.send(`
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
         <head>
-            <link rel="search" type="application/opensearchdescription+xml" title="Stark Search" href="/opensearch.xml">
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="manifest" href="/manifest.json">
             <title>Stark Search Engine</title>
             <style>
-                body { background: #000; color: #00ffcc; font-family: 'Courier New', monospace; text-align: center; padding: 50px; }
-                .stark-header { font-size: 3em; color: #ff0000; text-shadow: 0 0 15px #ff0000; }
-                input { width: 80%; padding: 15px; border: 2px solid #00ffcc; background: #111; color: #fff; border-radius: 25px; }
-                button { margin-top: 20px; padding: 10px 30px; background: #ff0000; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+                body { background: #000; color: #00ffcc; font-family: 'Courier New', monospace; text-align: center; margin: 0; padding: 50px 20px; }
+                .stark-header { font-size: 3em; font-weight: bold; color: #ff0000; text-shadow: 0 0 15px #ff0000; }
+                .status { color: #00ffcc; font-size: 0.9em; margin-bottom: 30px; }
+                input { width: 90%; max-width: 500px; padding: 15px; border: 2px solid #00ffcc; background: rgba(0, 255, 204, 0.1); color: #fff; border-radius: 30px; outline: none; }
+                button { margin-top: 20px; padding: 12px 30px; background: #ff0000; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
             </style>
         </head>
         <body>
             <div class="stark-header">STARK SEARCH</div>
-            <p>🛰️ STATUS: ALL GREEN</p>
-            <form action="/search" method="GET">
-                <input type="text" name="q" placeholder="Scan Global Database..." required>
+            <div class="status">🛰️ SATELLITE UPLINK: ACTIVE | ALL GREEN</div>
+            <form action="https://www.google.com/search" method="GET">
+                <input type="text" name="q" placeholder="Scanning Global Database..." required>
                 <br><button type="submit">INITIATE SEARCH</button>
             </form>
+            <div style="margin-top:40px; font-size:0.6em; color:#444;">SERVER ID: srv-d5djgkkhg0os73fa13pg</div>
         </body>
         </html>
     `);
 });
 
-app.get('/search', (req, res) => {
-    res.redirect('https://www.google.com/search?q=' + encodeURIComponent(req.query.q));
+app.listen(port, () => {
+    console.log('Stark Engine online on port ' + port);
 });
-
-app.listen(port, () => { console.log('Stark Engine Online'); });
