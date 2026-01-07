@@ -1,32 +1,27 @@
 
-        <!DOCTYPE html>
-        <html lang="hi">
-        <head>
-            <meta charset="UTF-8">
-            <title>STARK COMMAND CENTER</title>
-            <style>
-                body { background: #000; color: #00f2ff; font-family: 'Courier New', monospace; text-align: center; padding: 20px; }
-                .frame { border: 4px double #00f2ff; padding: 20px; box-shadow: 0 0 20px #00f2ff; }
-                .weather-text { font-size: 2.5em; color: #ff9933; }
-                img { width: 80%; border-radius: 10px; margin-top: 10px; }
-            </style>
-        </head>
-        <body>
-            <div class="frame">
-                <h1>● STARK MONITORING SYSTEM</h1>
-                <p>OPERATOR: ANSHUMAN SINGH | HQ: KHALILABAD</p>
-                <hr color="#00f2ff">
-                <div style="display:flex; justify-content: space-around;">
-                    <div>
-                        <h3 style="color:#ff9933;">WEATHER</h3>
-                        <div class="weather-text">--°C</div>
-                    </div>
-                    <div>
-                        <h3>NASA FEED</h3>
-                        <img src="">
-                    </div>
-                </div>
-            </div>
-        </body>
-        </html>
-        
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>ANSHUMAN STARK COMMAND</title>
+        <style>
+            body { background: #000; color: #00f2ff; font-family: 'Courier New', monospace; text-align: center; padding: 20px; }
+            .main-box { border: 3px solid #00f2ff; padding: 20px; box-shadow: 0 0 30px #00f2ff; border-radius: 15px; }
+            .earth-img { width: 400px; max-width: 90%; border-radius: 50%; border: 2px solid #00f2ff; box-shadow: 0 0 50px #00f2ff; margin: 20px; }
+            .blink { animation: b 1.5s infinite; color: #ff0000; }
+            @keyframes b { 50% { opacity: 0; } }
+            .data-text { font-size: 1.2em; color: #0f0; margin: 10px; }
+        </style>
+    </head>
+    <body>
+        <div class="main-box">
+            <h1 class="blink">● STARK SATELLITE LIVE FEED</h1>
+            <h2>OPERATOR: ANSHUMAN SINGH | HQ: KHALILABAD</h2>
+            <div class="data-text">LIVE TEMP: --°C | SYSTEM: NOMINAL</div>
+            <hr color="#00f2ff">
+            <img src="https://api.nasa.gov/assets/img/general/apod.jpg" class="earth-img">
+            <h3>SATELLITE INTEL: NASA Satellite Backup Feed</h3>
+            <p style="color:gray;">SYNC TIME: Wed Jan  7 09:16:24 2026</p>
+        </div>
+    </body>
+    </html>
+    
