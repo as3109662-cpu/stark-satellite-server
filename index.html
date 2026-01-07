@@ -1,43 +1,109 @@
 
     <!DOCTYPE html>
-    <html>
-    <head>
-        <title>JARVIS v10.0 | NASA LINK</title>
-        <style>
-            body { background: #000; color: #00f2ff; font-family: 'Courier New', monospace; text-align: center; }
-            .hud-box { border: 2px solid #00f2ff; margin: 20px; padding: 20px; box-shadow: 0 0 20px #00f2ff; }
-            .data-grid { display: flex; justify-content: space-around; flex-wrap: wrap; }
-            .box { border: 1px solid #ff9933; padding: 10px; width: 45%; margin: 5px; }
-            .nasa-image { width: 100%; border-radius: 10px; border: 1px solid #fff; }
-            .blink { animation: b 1s infinite; }
-            @keyframes b { 50% { opacity: 0; } }
-        </style>
-    </head>
-    <body>
-        <div class="hud-box">
-            <h1 class="blink">STARK INDUSTRIES: ORBITAL DEFENSE GRID</h1>
-            <p>HQ: KHALILABAD STATION | OPERATOR: ANSHUMAN SINGH</p>
-            <hr color="#00f2ff">
-            
-            <div class="data-grid">
-                <div class="box">
-                    <h3 style="color:#ff9933;">NASA LIVE FEED</h3>
-                    <p>Deep Space Link</p>
-                    <img src="" class="nasa-image">
-                </div>
-                <div class="box">
-                    <h3 style="color:#0f0;">ISS TRACKING DATA</h3>
-                    <p style="font-size: 11px;">TLE 1: 1 25544U 98067A 26006.24223504 .00010833 00000+0 20347-3 0 9999</p>
-                    <p style="font-size: 11px;">TLE 2: 2 25544 51.6328 21.1584 0007565 346.4032 13.6751 15.49129493546659</p>
-                    <p>VELOCITY: 7.66 KM/S | STATUS: SECURE</p>
-                </div>
-            </div>
-            
-            <div style="margin-top: 20px; color: #0f0; font-size: 12px;">
-                FAMILY GRID: MUMMY [SAFE] | PAPA [SAFE] | ARADHYA [SAFE]
-            </div>
-            <p style="font-size: 10px; color: grey;">UPLINK SYNC: Wed Jan  7 08:38:23 2026</p>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS v10.0 | KHALILABAD HQ</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #00f2ff;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Stark Industries Glow Effect */
+        .terminal {
+            border: 2px solid #00f2ff;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+            padding: 20px;
+            background: rgba(0, 242, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .header {
+            border-bottom: 2px solid #00f2ff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .data-box {
+            border: 1px solid #ff9933;
+            padding: 15px;
+            background: rgba(255, 153, 51, 0.05);
+        }
+
+        h1, h2, h3 {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+
+        .nasa-image {
+            width: 100%;
+            border: 1px solid #fff;
+            margin-top: 10px;
+            box-shadow: 0 0 10px #fff;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.8em;
+            color: #0f0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .grid-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal">
+        <div class="header">
+            <h1><span class="blink">●</span> STARK GLOBAL SATELLITE NETWORK</h1>
+            <p>OPERATOR: ANSHUMAN SINGH | LOCATION: KHALILABAD, INDIA</p>
         </div>
-    </body>
-    </html>
-    
+
+        <div class="grid-container">
+            <div class="data-box">
+                <h3 style="color: #ff9933;">NASA MISSION FEED</h3>
+                <p id="nasa-title">NASA Data Uplink Active...</p>
+                <img src="https://api.nasa.gov/assets/img/general/apod.jpg" class="nasa-image" alt="Deep Space">
+            </div>
+
+            <div class="data-box">
+                <h3 style="color: #0f0;">ISS TELEMETRY (TLE)</h3>
+                <p style="font-size: 0.7em;">LINE 1: 1 25544U 98067A 26006.24223504...</p>
+                <p style="font-size: 0.7em;">LINE 2: 2 25544 51.6328 21.1584 0007565...</p>
+                <hr color="#00f2ff">
+                <p>STATUS: ORBITING EARTH</p>
+                <p>VELOCITY: 27,600 KM/H</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>FAMILY PROTECTION GRID: [MUMMY: ONLINE] | [PAPA: ONLINE] | [ARADHYA: ONLINE]</p>
+            <p>SYSTEM STATUS: ALL SYSTEMS NOMINAL - VERSION 10.0.1</p>
+        </div>
+    </div>
+
+</body>
+</html>
