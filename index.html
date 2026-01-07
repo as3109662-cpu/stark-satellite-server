@@ -3,40 +3,44 @@
             <html>
             <head>
                 <meta charset="UTF-8">
-                <title>STARK MISSION CONTROL</title>
+                <title>STARK CINEMATIC MONITOR</title>
                 <style>
-                    body { background: #000; color: #00f2ff; font-family: 'Courier New', monospace; padding: 10px; text-align: center; }
-                    .header { border-bottom: 2px solid #00f2ff; margin-bottom: 20px; padding-bottom: 10px; }
-                    .grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
-                    .card { border: 2px solid #00f2ff; padding: 15px; width: 300px; background: rgba(0,242,255,0.05); border-radius: 8px; box-shadow: 0 0 15px #00f2ff; }
-                    img { width: 100%; border-radius: 5px; border: 1px solid #444; margin-top: 10px; }
+                    body { background: #000; color: #00f2ff; font-family: 'Courier New', monospace; overflow-x: hidden; text-align: center; }
+                    .sky-container {
+                        width: 95%; height: 450px; margin: 20px auto; border: 3px solid #00f2ff;
+                        border-radius: 15px; overflow: hidden; position: relative; box-shadow: 0 0 50px #00f2ff;
+                    }
+                    .sky-photo {
+                        width: 150%; height: 100%; object-fit: cover; position: absolute; left: 0;
+                        animation: pan-view 25s ease-in-out infinite alternate;
+                    }
+                    @keyframes pan-view { 0% { transform: translateX(0); } 100% { transform: translateX(-30%); } }
+                    .info-grid { display: flex; justify-content: center; gap: 20px; padding: 20px; flex-wrap: wrap; }
+                    .card { border: 2px solid #00f2ff; padding: 15px; width: 250px; background: rgba(0,242,255,0.1); border-radius: 10px; }
                     .blink { animation: b 1s infinite; color: red; }
                     @keyframes b { 50% { opacity: 0; } }
                 </style>
             </head>
             <body>
-                <div class="header">
-                    <h1><span class="blink">●</span> STARK GLOBAL GRID v20.1</h1>
-                    <p>OPERATOR: ANSHUMAN SINGH | HQ: KHALILABAD</p>
-                </div>
-                <div class="grid">
+                <h1 class="blink">● STARK LIVE PANORAMA</h1>
+                <p>OPERATOR: ANSHUMAN SINGH | HQ: KHALILABAD STATION</p>
+                <div class="sky-container"><img src="https://images-assets.nasa.gov/image/PIA12348/PIA12348~large.jpg" class="sky-photo"></div>
+                <h2 style="color:white; margin-top:-10px;">TARGET: Deep Space Monitor</h2>
+                <div class="info-grid">
                     <div class="card" style="border-color: #ff9933;">
-                        <h3 style="color: #ff9933;">HQ WEATHER</h3>
-                        <p style="font-size: 2.5em; margin: 10px 0;">--°C</p>
-                        <p>KHALILABAD, IN</p>
+                        <h3 style="color:#ff9933;">HQ TEMP</h3>
+                        <p style="font-size: 2em;">--°C</p>
                     </div>
                     <div class="card">
-                        <h3>EARTH MONITOR</h3>
-                        <img src="https://api.nasa.gov/assets/img/general/apod.jpg">
+                        <h3>SCHOOL ZONE</h3>
+                        <p style="font-size: 0.8em;">KHALILABAD MONTESSORI</p>
+                        <p style="color:#0f0;">[SECURED]</p>
                     </div>
                     <div class="card" style="border-color: #0f0;">
-                        <h3 style="color: #0f0;">ORBITAL INTEL</h3>
-                        <p>NEXT SPACEX: USSF-44</p>
-                        <hr color="#0f0">
-                        <p style="font-size: 0.8em;">STATUS: ACTIVE</p>
+                        <h3>SYSTEM</h3>
+                        <p>SYNC: Wed Jan  7 09:31:03 2026</p>
                     </div>
                 </div>
-                <p style="color: gray; font-size: 0.7em; margin-top: 30px;">SYNC TIME: Wed Jan  7 09:21:55 2026</p>
             </body>
             </html>
             
