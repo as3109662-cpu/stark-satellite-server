@@ -1,27 +1,42 @@
 
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>ANSHUMAN STARK COMMAND</title>
-        <style>
-            body { background: #000; color: #00f2ff; font-family: 'Courier New', monospace; text-align: center; padding: 20px; }
-            .main-box { border: 3px solid #00f2ff; padding: 20px; box-shadow: 0 0 30px #00f2ff; border-radius: 15px; }
-            .earth-img { width: 400px; max-width: 90%; border-radius: 50%; border: 2px solid #00f2ff; box-shadow: 0 0 50px #00f2ff; margin: 20px; }
-            .blink { animation: b 1.5s infinite; color: #ff0000; }
-            @keyframes b { 50% { opacity: 0; } }
-            .data-text { font-size: 1.2em; color: #0f0; margin: 10px; }
-        </style>
-    </head>
-    <body>
-        <div class="main-box">
-            <h1 class="blink">● STARK SATELLITE LIVE FEED</h1>
-            <h2>OPERATOR: ANSHUMAN SINGH | HQ: KHALILABAD</h2>
-            <div class="data-text">LIVE TEMP: --°C | SYSTEM: NOMINAL</div>
-            <hr color="#00f2ff">
-            <img src="https://api.nasa.gov/assets/img/general/apod.jpg" class="earth-img">
-            <h3>SATELLITE INTEL: NASA Satellite Backup Feed</h3>
-            <p style="color:gray;">SYNC TIME: Wed Jan  7 09:16:24 2026</p>
-        </div>
-    </body>
-    </html>
-    
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>STARK MISSION CONTROL</title>
+                <style>
+                    body { background: #000; color: #00f2ff; font-family: 'Courier New', monospace; padding: 10px; text-align: center; }
+                    .header { border-bottom: 2px solid #00f2ff; margin-bottom: 20px; padding-bottom: 10px; }
+                    .grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+                    .card { border: 2px solid #00f2ff; padding: 15px; width: 300px; background: rgba(0,242,255,0.05); border-radius: 8px; box-shadow: 0 0 15px #00f2ff; }
+                    img { width: 100%; border-radius: 5px; border: 1px solid #444; margin-top: 10px; }
+                    .blink { animation: b 1s infinite; color: red; }
+                    @keyframes b { 50% { opacity: 0; } }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1><span class="blink">●</span> STARK GLOBAL GRID v20.1</h1>
+                    <p>OPERATOR: ANSHUMAN SINGH | HQ: KHALILABAD</p>
+                </div>
+                <div class="grid">
+                    <div class="card" style="border-color: #ff9933;">
+                        <h3 style="color: #ff9933;">HQ WEATHER</h3>
+                        <p style="font-size: 2.5em; margin: 10px 0;">--°C</p>
+                        <p>KHALILABAD, IN</p>
+                    </div>
+                    <div class="card">
+                        <h3>EARTH MONITOR</h3>
+                        <img src="https://api.nasa.gov/assets/img/general/apod.jpg">
+                    </div>
+                    <div class="card" style="border-color: #0f0;">
+                        <h3 style="color: #0f0;">ORBITAL INTEL</h3>
+                        <p>NEXT SPACEX: USSF-44</p>
+                        <hr color="#0f0">
+                        <p style="font-size: 0.8em;">STATUS: ACTIVE</p>
+                    </div>
+                </div>
+                <p style="color: gray; font-size: 0.7em; margin-top: 30px;">SYNC TIME: Wed Jan  7 09:21:55 2026</p>
+            </body>
+            </html>
+            
