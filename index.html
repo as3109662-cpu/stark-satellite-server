@@ -2,28 +2,41 @@
     <!DOCTYPE html>
     <html>
     <head>
-        <title>STARK DATA EXTRACTOR</title>
+        <title>JARVIS v10.0 | NASA LINK</title>
         <style>
             body { background: #000; color: #00f2ff; font-family: 'Courier New', monospace; text-align: center; }
-            .secure-box { border: 2px solid #00f2ff; margin: 20px; padding: 20px; background: rgba(0,242,255,0.05); }
-            .data-line { color: #0f0; font-size: 1.1em; margin: 10px 0; }
-            .warning { color: red; font-weight: bold; animation: blink 1s infinite; }
-            @keyframes blink { 50% { opacity: 0; } }
+            .hud-box { border: 2px solid #00f2ff; margin: 20px; padding: 20px; box-shadow: 0 0 20px #00f2ff; }
+            .data-grid { display: flex; justify-content: space-around; flex-wrap: wrap; }
+            .box { border: 1px solid #ff9933; padding: 10px; width: 45%; margin: 5px; }
+            .nasa-image { width: 100%; border-radius: 10px; border: 1px solid #fff; }
+            .blink { animation: b 1s infinite; }
+            @keyframes b { 50% { opacity: 0; } }
         </style>
     </head>
     <body>
-        <div class="secure-box">
-            <h1>STARK DATA EXTRACTION MODULE</h1>
-            <p>LOCATION: KHALILABAD HQ | USER: ANSHUMAN SINGH</p>
-            <hr>
-            <div class="warning">SECURE MODE: COMMANDS DISABLED (READ-ONLY)</div>
-            <div class="data-line">SATELLITE POSITION: Over North India</div>
-            <div class="data-line">STARLINK NODES: 42 Nodes Active</div>
-            <div class="data-line">LINK STRENGTH: 98%</div>
-            <p style="font-size: 0.8em; color: grey;">LAST SYNC: Wed Jan  7 08:36:06 2026</p>
-        </div>
-        <div style="margin-top: 20px;">
-            <p>FAMILY PROTECTION GRID: MUMMY [SECURE] | PAPA [SECURE] | ARADHYA [SECURE]</p>
+        <div class="hud-box">
+            <h1 class="blink">STARK INDUSTRIES: ORBITAL DEFENSE GRID</h1>
+            <p>HQ: KHALILABAD STATION | OPERATOR: ANSHUMAN SINGH</p>
+            <hr color="#00f2ff">
+            
+            <div class="data-grid">
+                <div class="box">
+                    <h3 style="color:#ff9933;">NASA LIVE FEED</h3>
+                    <p>Deep Space Link</p>
+                    <img src="" class="nasa-image">
+                </div>
+                <div class="box">
+                    <h3 style="color:#0f0;">ISS TRACKING DATA</h3>
+                    <p style="font-size: 11px;">TLE 1: 1 25544U 98067A 26006.24223504 .00010833 00000+0 20347-3 0 9999</p>
+                    <p style="font-size: 11px;">TLE 2: 2 25544 51.6328 21.1584 0007565 346.4032 13.6751 15.49129493546659</p>
+                    <p>VELOCITY: 7.66 KM/S | STATUS: SECURE</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; color: #0f0; font-size: 12px;">
+                FAMILY GRID: MUMMY [SAFE] | PAPA [SAFE] | ARADHYA [SAFE]
+            </div>
+            <p style="font-size: 10px; color: grey;">UPLINK SYNC: Wed Jan  7 08:38:23 2026</p>
         </div>
     </body>
     </html>
