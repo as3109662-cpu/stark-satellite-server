@@ -1,33 +1,47 @@
 
     <!DOCTYPE html>
-    <html lang="en">
+    <html>
     <head>
-        <meta charset="UTF-8">
-        <title>STARK HQ - KHALILABAD</title>
+        <title>GLOBAL STARK NETWORK</title>
         <style>
-            body { background-color: #0a0a0a; color: #00f2ff; font-family: 'Courier New', monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
-            .panel { border: 2px solid #00f2ff; padding: 30px; border-radius: 15px; box-shadow: 0 0 20px #00f2ff, inset 0 0 10px #00f2ff; background: rgba(0, 242, 255, 0.05); text-align: center; }
-            h1 { font-size: 22px; text-shadow: 0 0 10px #00f2ff; letter-spacing: 3px; margin-bottom: 20px; }
-            .status-glow { color: #fff; text-shadow: 0 0 5px #fff, 0 0 20px #00f2ff; font-size: 18px; font-weight: bold; margin: 15px 0; }
-            .family-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; font-size: 11px; border-top: 1px solid #00f2ff; padding-top: 15px; }
-            .member { color: #00ff41; }
-            .scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: rgba(0, 242, 255, 0.5); box-shadow: 0 0 15px #00f2ff; animation: scan 4s linear infinite; }
-            @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+            body { background: #000; color: #0f0; font-family: 'Courier New', monospace; text-align: center; margin: 0; padding: 20px; }
+            .header { color: #00f2ff; text-shadow: 0 0 10px #00f2ff; border-bottom: 2px solid #00f2ff; padding-bottom: 10px; }
+            .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px; }
+            .box { border: 1px solid #0f0; padding: 15px; width: 200px; background: rgba(0,255,0,0.05); }
+            .status { color: #fff; font-size: 1.2em; margin: 20px 0; border: 1px dashed #fff; padding: 10px; }
+            .blinker { animation: blink 1s infinite; color: red; font-weight: bold; }
+            @keyframes blink { 50% { opacity: 0; } }
+            .scan { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: #00f2ff; animation: move 5s infinite; }
+            @keyframes move { 0% { top: 0; } 100% { top: 100%; } }
         </style>
     </head>
     <body>
-        <div class="scan-line"></div>
-        <div class="panel">
-            <h1>STARK HQ - KHALILABAD</h1>
-            <p style="font-size: 9px;">USER: ANSHUMAN SINGH | SECTOR: RAILWAY STATION</p>
-            <div class="status-glow">>> SYSTEM FULLY ARMED <<</div>
-            <div class="family-grid">
-                <div class="member">MUMMY: SECURE</div>
-                <div class="member">PAPA: ACTIVE</div>
-                <div class="member">ARADHYA: MONITORING</div>
-                <div class="member">VANSH: CONNECTED</div>
+        <div class="scan"></div>
+        <h1 class="header">STARK GLOBAL SURVEILLANCE</h1>
+        <p>COMMANDER: ANSHUMAN SINGH | HQ: KHALILABAD</p>
+        
+        <div class="status">MISSION: ACTIVATE WORLDWIDE MONITORING</div>
+
+        <div class="container">
+            <div class="box">
+                <h3 style="color:#00f2ff;">NASA</h3>
+                <p>SAT: HUBBLE-2</p>
+                <p class="blinker">LINK ACTIVE</p>
             </div>
-            <p style="font-size: 8px; margin-top: 20px; color: grey;">SAT-LINK: NORAD 41752</p>
+            <div class="box">
+                <h3 style="color:#ff9933;">ISRO</h3>
+                <p>SAT: EOS-04</p>
+                <p>TRACKING SECTOR 7</p>
+            </div>
+            <div class="box">
+                <h3 style="color:#fff;">SPACEX</h3>
+                <p>STARLINK ACTIVE</p>
+                <p>SIGNAL: 100%</p>
+            </div>
+        </div>
+        
+        <div style="margin-top:30px; border: 1px solid #444; padding: 10px; color: #00ff41;">
+            GRID STATUS: MUMMY [SAFE] | PAPA [ONLINE] | ARADHYA [SECURE] | VANSH [CONNECTED]
         </div>
     </body>
     </html>
