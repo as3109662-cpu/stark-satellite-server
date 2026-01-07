@@ -3,35 +3,51 @@
             <html>
             <head>
                 <meta charset="UTF-8">
-                <title>STARK COMMAND CENTER</title>
+                <title>STARK PRIVATE HQ</title>
                 <style>
                     body { background: #000; color: #00f2ff; font-family: 'Courier New', monospace; text-align: center; margin: 0; }
-                    .sky-frame { width: 95%; height: 450px; margin: 20px auto; border: 3px solid #00f2ff; border-radius: 15px; overflow: hidden; position: relative; box-shadow: 0 0 50px #00f2ff; }
-                    .sky-img { width: 160%; height: 100%; object-fit: cover; position: absolute; left: 0; animation: pan 30s linear infinite alternate; }
+                    .header { padding: 15px; background: rgba(0,242,255,0.05); border-bottom: 2px solid #00f2ff; }
+                    .sky-frame { width: 95%; height: 400px; margin: 20px auto; border: 3px solid #00f2ff; border-radius: 15px; overflow: hidden; position: relative; }
+                    .sky-img { width: 160%; height: 100%; object-fit: cover; position: absolute; animation: pan 30s linear infinite alternate; }
                     @keyframes pan { 0% { transform: translateX(0); } 100% { transform: translateX(-35%); } }
-                    .grid { display: flex; justify-content: center; gap: 20px; padding: 10px; flex-wrap: wrap; }
-                    .card { border: 2px solid #00f2ff; padding: 15px; width: 260px; background: rgba(0,242,255,0.1); border-radius: 12px; }
+                    .grid { display: flex; justify-content: center; gap: 15px; padding: 20px; flex-wrap: wrap; }
+                    .card { border: 2px solid #00f2ff; padding: 15px; width: 280px; background: rgba(0,242,255,0.1); border-radius: 12px; box-shadow: 0 0 15px #00f2ff; }
+                    .memory-text { color: #fff; font-size: 0.9em; margin: 5px 0; }
+                    .blink { animation: b 1s infinite; color: #0f0; }
+                    @keyframes b { 50% { opacity: 0; } }
                 </style>
             </head>
             <body>
-                <h2 style="font-size: 0.8em; margin-top: 10px;">OPERATOR: ANSHUMAN SINGH | HQ: KHALILABAD</h2>
+                <div class="header">
+                    <h1 style="margin:0;">● ANSHUMAN SINGH'S PRIVATE HQ</h1>
+                    <p style="font-size: 0.7em;">LOCATION: NEAR KHALILABAD STATION | STATUS: <span class="blink">SECURED</span></p>
+                </div>
+
                 <div class="sky-frame"><img src="https://images-assets.nasa.gov/image/PIA12348/PIA12348~large.jpg" class="sky-img"></div>
+
                 <div class="grid">
+                    <div class="card" style="border-color: #ff00ff;">
+                        <h3 style="color: #ff00ff;">USER INTEL</h3>
+                        <p class="memory-text">NAME: Anshuman Singh</p>
+                        <p class="memory-text">SCHOOL: Khalilabad Montessori School</p>
+                    </div>
+
                     <div class="card" style="border-color: #ff9933;">
-                        <h3 style="color: #ff9933;">HQ TEMP</h3>
-                        <p style="font-size: 2.5em; margin: 10px;">24°C</p>
+                        <h3 style="color: #ff9933;">KHALILABAD HQ</h3>
+                        <p style="font-size: 2.2em; margin: 10px;">24°C</p>
+                        <p class="memory-text">SYSTEM: ONLINE</p>
                     </div>
-                    <div class="card">
-                        <h3>SCHOOL ZONE</h3>
-                        <p>MONTESSORI SCHOOL</p>
-                        <p style="color:#0f0;">SECURED</p>
-                    </div>
+
                     <div class="card" style="border-color: #0f0;">
-                        <h3>CORE STATUS</h3>
-                        <p style="font-size: 0.7em;">Wed Jan  7 09:37:04 2026</p>
-                        <p style="color:#0f0;">ONLINE</p>
+                        <h3 style="color: #0f0;">FAMILY STATUS</h3>
+                        <p class="memory-text">SISTER: Aradhya Singh</p>
+                        <p class="memory-text">HQ PROTECTION: ACTIVE</p>
                     </div>
                 </div>
+                
+                <footer style="color: gray; font-size: 0.7em; margin-top: 20px;">
+                    LAST MEMORY SYNC: Wed Jan  7 09:43:17 2026
+                </footer>
             </body>
             </html>
             
