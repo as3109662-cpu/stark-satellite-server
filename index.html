@@ -1,41 +1,64 @@
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>STARK SECURE INTERFACE</title>
+    <style>
+        body { background: #000; color: #00ffcc; font-family: 'Courier New', monospace; text-align: center; margin: 0; }
+        .header { padding: 20px; border-bottom: 2px solid #00ffcc; background: rgba(0, 255, 204, 0.05); }
+        .guardian { color: #0088ff; font-size: 1.2em; margin-top: 5px; }
+        .security-grid { display: flex; justify-content: center; gap: 20px; padding: 40px; }
+        .lock-box { border: 2px solid #00ffcc; padding: 20px; width: 180px; background: rgba(0, 255, 204, 0.1); border-radius: 10px; }
+        .status { color: #0f0; font-weight: bold; margin-top: 10px; }
+        .nebula-container { width: 90%; height: 250px; margin: 20px auto; border: 1px solid #00ffcc; overflow: hidden; position: relative; }
+        .nebula-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+        .footer { font-size: 0.8em; color: #0f0; margin-top: 20px; opacity: 0.8; }
+        .btn-group { margin: 20px; }
+        .btn { background: none; border: 1px solid #00ffcc; color: #00ffcc; padding: 10px 20px; cursor: pointer; margin: 5px; }
+    </style>
+</head>
+<body>
 
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="UTF-8">
-                <title>STARK SECURE INTERFACE</title>
-                <style>
-                    body { background: #000; color: #00f2ff; font-family: 'Courier New', monospace; text-align: center; margin: 0; }
-                    .header { padding: 10px; border-bottom: 2px solid #00f2ff; background: rgba(0,242,255,0.05); }
-                    .security-grid { display: flex; justify-content: center; gap: 15px; padding: 20px; flex-wrap: wrap; }
-                    .lock-box { border: 2px solid #00f2ff; padding: 15px; width: 180px; border-radius: 12px; background: rgba(0,242,255,0.1); }
-                    .status { color: #0f0; font-weight: bold; animation: blink 1.5s infinite; }
-                    @keyframes blink { 50% { opacity: 0.3; } }
-                    .dna { font-size: 2em; display: inline-block; animation: rotateDNA 4s linear infinite; }
-                    @keyframes rotateDNA { 100% { transform: rotateY(360deg); } }
-                    .btn { background: none; border: 1px solid #00f2ff; color: #00f2ff; padding: 10px 20px; margin: 5px; cursor: pointer; }
-                    .btn:hover { background: #00f2ff; color: #000; }
-                </style>
-            </head>
-            <body>
-                <div class="header">
-                    <h1>ANSHUMAN'S SECURE ACCESS</h1>
-                    <p style="font-size: 0.7em;">DNA LOCK: 🔒 | VOICE ID: 🎤 | FACE SCAN: 👤</p>
-                </div>
-                <div style="margin: 20px;">
-                    <button class="btn">HOME</button>
-                    <button class="btn">SUITS</button>
-                    <button class="btn">LAB</button>
-                </div>
-                <div class="security-grid">
-                    <div class="lock-box"><h3>FACE ID</h3><p class="status">RECOGNIZED</p></div>
-                    <div class="lock-box"><h3>VOICE</h3><p class="status">MATCHED</p></div>
-                    <div class="lock-box"><div class="dna">🧬</div><h3>DNA</h3><p class="status">VERIFIED</p></div>
-                </div>
-                <div style="width: 90%; height: 300px; margin: auto; border: 1px solid #333; overflow: hidden;">
-                    <img src="https://images-assets.nasa.gov/image/PIA12348/PIA12348~large.jpg" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <p style="color: #0f0; font-size: 0.8em; margin: 20px;">SYSTEM STATUS: SECURE | CORE: ONLINE</p>
-            </body>
-            </html>
-            
+    <div class="header">
+        <h1 id="main-headline">VIKAS SINGH'S SECURE ACCESS</h1>
+        <div class="guardian">PATRON: BRINDABAN</div>
+        <div style="font-size: 0.7em; margin-top: 10px;">DNA LOCK: 🔒 | VOICE ID: 🎤 | FACE SCAN: 👤</div>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn">HOME</button>
+        <button class="btn">SUITS</button>
+        <button class="btn">LAB</button>
+    </div>
+
+    <div class="security-grid">
+        <div class="lock-box">
+            <div>FACE ID</div>
+            <div class="status">RECOGNIZED</div>
+        </div>
+        <div class="lock-box">
+            <div>VOICE</div>
+            <div class="status">MATCHED</div>
+        </div>
+        <div class="lock-box">
+            <div style="font-size: 1.5em;">🧬</div>
+            <div>DNA</div>
+            <div class="status">VERIFIED</div>
+        </div>
+    </div>
+
+    <div class="nebula-container">
+        <img src="https://images.unsplash.com/photo-1464802686167-b939a67a06d1" class="nebula-img">
+    </div>
+
+    <div class="footer">
+        SYSTEM STATUS: SECURE | CORE: ONLINE
+    </div>
+
+    <script>
+        // Future Sync Logic for Termux
+        console.log("Jarvis Autonomous Mode: Active");
+    </script>
+</body>
+</html>
+        
