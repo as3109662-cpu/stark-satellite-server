@@ -1,55 +1,171 @@
-        
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>STARK SATELLITE NETWORK</title>
-    <style>
-        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; overflow: hidden; }
-        .header { border-bottom: 2px solid #0f0; padding: 10px; display: flex; justify-content: space-between; }
-        .status-box { border: 1px solid #0f0; padding: 15px; margin: 10px; background: rgba(0, 50, 0, 0.3); }
-        .dna-tag { color: #fff; background: #005500; padding: 5px 10px; border-radius: 5px; border: 1px blink solid #0f0; }
-        #nasa-img { width: 100%; max-height: 300px; border: 1px solid #0f0; object-fit: cover; }
-        .map-container { height: 200px; border: 1px dashed #0f0; display: flex; align-items: center; justify-content: center; background: url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg') center/contain no-repeat; }
-        .blinking { animation: blinker 1.5s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>STARK AI DASHBOARD</title>
+
+<style>
+/* ===== RESET ===== */
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  background: black;
+  color: #00ff9c;
+  font-family: "Courier New", monospace;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ===== MAIN UI ===== */
+.stark-ui {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+/* ===== PANELS ===== */
+.panel {
+  border: 1px solid #00ff9c;
+  padding: 10px;
+  margin-bottom: 12px;
+  background: rgba(0,0,0,0.85);
+}
+
+.panel-title {
+  font-weight: bold;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+/* ===== NASA IMAGE ===== */
+#nasaImage {
+  width: 100%;
+  display: none;
+  margin-top: 10px;
+}
+
+/* ===== JARVIS ===== */
+#jarvisOutput {
+  font-size: 13px;
+  min-height: 120px;
+  margin-bottom: 6px;
+}
+
+#jarvisInput {
+  width: 100%;
+  background: black;
+  color: #00ff9c;
+  border: 1px solid #00ff9c;
+  padding: 6px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  margin-top: auto;
+  border: 1px solid #004d33;
+  padding: 8px;
+  font-size: 12px;
+}
+</style>
 </head>
+
 <body>
-    <div class="header">
-        <div>📡 STARK SATELLITE LINK: <span class="blinking">ONLINE</span></div>
-        <div class="dna-tag">DNA ID: VK-BR-STARK-2026 VERIFIED</div>
+
+<div class="stark-ui">
+
+  <!-- ===== NASA PANEL ===== -->
+  <div class="panel">
+    <div class="panel-title">NASA IMAGE OF THE DAY</div>
+    <div id="nasaStatus">Scanning Deep Space...</div>
+
+    <img id="nasaImage">
+    <p id="nasaTitle"></p>
+    <p id="nasaDesc" style="font-size:12px;"></p>
+  </div>
+
+  <!-- ===== JARVIS PANEL ===== -->
+  <div class="panel">
+    <div class="panel-title">JARVIS COMMAND CONSOLE</div>
+
+    <div id="jarvisOutput">
+      JARVIS ONLINE ▌<br>
+      Type <b>help</b> to see commands
     </div>
 
-    <div class="status-box">
-        <h3>🔭 NASA IMAGE OF THE DAY</h3>
-        <img id="nasa-img" src="https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY" alt="Scanning Deep Space...">
-        <p id="nasa-desc">Master, fetching latest interstellar imagery...</p>
-    </div>
+    <input id="jarvisInput" type="text" placeholder="Type command and press Enter">
+  </div>
 
-    <div class="status-box">
-        <h3>🌍 GLOBAL SATELLITE TRACKER</h3>
-        <div class="map-container">
-            <div class="blinking" style="color: red;">[🛰️ ISS_LIVE_COORD]</div>
-        </div>
-        <p>Current Status: Scanning Orbital Layers...</p>
-    </div>
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    STARK CORE ACCESS GRANTED<br>
+    SECURITY LEVEL: GREEN
+  </div>
 
-    <div class="status-box" style="border-color: #00f; color: #00f;">
-        <h3>🛡️ PATRON: BRINDABAN</h3>
-        <p>Security: Master Vikas Singh - STARK CORE ACCESS GRANTED</p>
-    </div>
+</div>
 
-    <script>
-        // Automatic Data Refresh
-        async function updateDashboard() {
-            try {
-                const response = await fetch('satellite_data.json');
-                const data = await response.json();
-                document.getElementById('nasa-desc').innerText = data.nasa_update.title + ": " + data.nasa_update.info;
-            } catch (e) { console.log("Waiting for data push..."); }
-        }
-        setInterval(updateDashboard, 5000);
-    </script>
+<script>
+/* ====== NASA API ====== */
+const NASA_API_KEY = "PASTE_YOUR_API_KEY_HERE";
+
+fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`)
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("nasaStatus").innerText = "Signal Locked ✔";
+
+    const img = document.getElementById("nasaImage");
+    img.src = data.url;
+    img.style.display = "block";
+
+    document.getElementById("nasaTitle").innerText = data.title;
+    document.getElementById("nasaDesc").innerText = data.explanation;
+  })
+  .catch(() => {
+    document.getElementById("nasaStatus").innerText = "NASA API ERROR ❌";
+  });
+
+/* ====== JARVIS SYSTEM ====== */
+const input = document.getElementById("jarvisInput");
+const output = document.getElementById("jarvisOutput");
+
+function reply(text) {
+  output.innerHTML += "<br>> " + text;
+  output.scrollTop = output.scrollHeight;
+}
+
+input.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    const cmd = input.value.toLowerCase().trim();
+    reply(cmd);
+    input.value = "";
+
+    if (cmd === "help") {
+      reply("Commands: help, scan, status, time, clear");
+    }
+    else if (cmd === "scan") {
+      reply("Scanning systems... All modules operational ✔");
+    }
+    else if (cmd === "status") {
+      reply("STARK CORE: ONLINE | DEFENSE: ACTIVE");
+    }
+    else if (cmd === "time") {
+      reply("Current Time: " + new Date().toLocaleTimeString());
+    }
+    else if (cmd === "clear") {
+      output.innerHTML = "JARVIS ONLINE ▌";
+    }
+    else {
+      reply("Unknown command ❌");
+    }
+  }
+});
+</script>
+
 </body>
 </html>
