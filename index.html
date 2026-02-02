@@ -1,25 +1,18 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>STARK AI DASHBOARD</title>
 
 <style>
-/* ===== RESET ===== */
+/* ===== RESET & THEME ===== */
 * { box-sizing: border-box; }
-
 html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100%;
-  background: black;
-  color: #00ff9c;
+  margin: 0; padding: 0; width: 100%; min-height: 100%;
+  background: black; color: #00ff9c;
   font-family: "Courier New", monospace;
   overflow-x: hidden;
-  overflow-y: auto;
 }
 
 /* ===== MAIN UI ===== */
@@ -27,51 +20,60 @@ html, body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 15px;
 }
 
-/* ===== PANELS ===== */
 .panel {
   border: 1px solid #00ff9c;
-  padding: 10px;
-  margin-bottom: 12px;
-  background: rgba(0,0,0,0.85);
+  padding: 15px;
+  margin-bottom: 15px;
+  background: rgba(0, 255, 156, 0.03);
+  box-shadow: inset 0 0 15px rgba(0, 255, 156, 0.1);
 }
 
 .panel-title {
   font-weight: bold;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
   text-transform: uppercase;
+  border-left: 4px solid #00ff9c;
+  padding-left: 10px;
 }
 
-/* ===== NASA IMAGE ===== */
+/* ===== NASA CONTENT ===== */
 #nasaImage {
   width: 100%;
+  max-height: 450px;
+  object-fit: contain;
   display: none;
-  margin-top: 10px;
+  margin: 15px 0;
+  border: 1px dashed #00ff9c;
 }
 
-/* ===== JARVIS ===== */
+/* ===== JARVIS CONSOLE ===== */
 #jarvisOutput {
-  font-size: 13px;
-  min-height: 120px;
-  margin-bottom: 6px;
+  font-size: 14px;
+  height: 180px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #004d33;
 }
 
 #jarvisInput {
   width: 100%;
-  background: black;
+  background: transparent;
   color: #00ff9c;
   border: 1px solid #00ff9c;
-  padding: 6px;
+  padding: 12px;
+  outline: none;
+  font-family: inherit;
 }
 
-/* ===== FOOTER ===== */
 .footer {
   margin-top: auto;
-  border: 1px solid #004d33;
-  padding: 8px;
-  font-size: 12px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 1px;
+  opacity: 0.7;
 }
 </style>
 </head>
@@ -80,90 +82,91 @@ html, body {
 
 <div class="stark-ui">
 
-  <!-- ===== NASA PANEL ===== -->
   <div class="panel">
-    <div class="panel-title">NASA IMAGE OF THE DAY</div>
-    <div id="nasaStatus">Scanning Deep Space...</div>
-
+    <div class="panel-title">DEEP SPACE TELEMETRY</div>
+    <div id="nasaStatus">INITIALIZING UPLINK...</div>
     <img id="nasaImage">
-    <p id="nasaTitle"></p>
-    <p id="nasaDesc" style="font-size:12px;"></p>
+    <h4 id="nasaTitle"></h4>
+    <p id="nasaDesc" style="font-size:12px; opacity:0.8;"></p>
   </div>
 
-  <!-- ===== JARVIS PANEL ===== -->
   <div class="panel">
-    <div class="panel-title">JARVIS COMMAND CONSOLE</div>
-
+    <div class="panel-title">SYSTEM INTERFACE</div>
     <div id="jarvisOutput">
-      JARVIS ONLINE ▌<br>
-      Type <b>help</b> to see commands
+      [SYSTEM] JARVIS v4.0 ONLINE...<br>
+      [AUTH] STARK_ACCESS_GRANTED<br>
+      Type <b>help</b> for command list.
     </div>
-
-    <input id="jarvisInput" type="text" placeholder="Type command and press Enter">
+    <input id="jarvisInput" type="text" placeholder="Awaiting command..." autofocus>
   </div>
 
-  <!-- ===== FOOTER ===== -->
   <div class="footer">
-    STARK CORE ACCESS GRANTED<br>
-    SECURITY LEVEL: GREEN
+    PROPRIETARY TECHNOLOGY - STARK INDUSTRIES © 2026
   </div>
 
 </div>
 
 <script>
-/* ====== NASA API ====== */
-const NASA_API_KEY = "PASTE_YOUR_API_KEY_HERE";
+/* ====== NASA CORE ====== */
+const NASA_API_KEY = "Z11J7TEWFY6BhMstiUF9pmHFKGe8ksKcBvVLFv0K";
 
-fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`)
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("nasaStatus").innerText = "Signal Locked ✔";
+async function fetchNasaData() {
+    const status = document.getElementById("nasaStatus");
+    try {
+        const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`);
+        const data = await response.json();
 
-    const img = document.getElementById("nasaImage");
-    img.src = data.url;
-    img.style.display = "block";
+        if (data.url) {
+            status.innerText = "SIGNAL RECEPTION: 100% (STABLE)";
+            const img = document.getElementById("nasaImage");
+            img.src = data.url;
+            img.style.display = "block";
+            document.getElementById("nasaTitle").innerText = data.title;
+            document.getElementById("nasaDesc").innerText = data.explanation;
+        } else {
+            status.innerText = "DATA CORRUPTED: Check API Key/Limit";
+        }
+    } catch (err) {
+        status.innerText = "UPLINK FAILED: Connection Error";
+    }
+}
 
-    document.getElementById("nasaTitle").innerText = data.title;
-    document.getElementById("nasaDesc").innerText = data.explanation;
-  })
-  .catch(() => {
-    document.getElementById("nasaStatus").innerText = "NASA API ERROR ❌";
-  });
+fetchNasaData();
 
-/* ====== JARVIS SYSTEM ====== */
+/* ====== JARVIS INTERFACE ====== */
 const input = document.getElementById("jarvisInput");
 const output = document.getElementById("jarvisOutput");
 
-function reply(text) {
-  output.innerHTML += "<br>> " + text;
-  output.scrollTop = output.scrollHeight;
+function log(msg, isUser = false) {
+    const prefix = isUser ? "USER: " : "JARVIS: ";
+    output.innerHTML += `<div>${prefix}${msg}</div>`;
+    output.scrollTop = output.scrollHeight;
 }
 
 input.addEventListener("keydown", e => {
-  if (e.key === "Enter") {
-    const cmd = input.value.toLowerCase().trim();
-    reply(cmd);
-    input.value = "";
+    if (e.key === "Enter") {
+        const cmd = input.value.trim().toLowerCase();
+        if (!cmd) return;
+        
+        log(cmd, true);
+        input.value = "";
 
-    if (cmd === "help") {
-      reply("Commands: help, scan, status, time, clear");
+        setTimeout(() => {
+            if (cmd === "help") {
+                log("Commands: scan, status, time, clear");
+            } else if (cmd === "scan") {
+                log("Scanning local network... No intrusions detected. All clear.");
+            } else if (cmd === "status") {
+                log("All systems optimal. Reactor core at 94%.");
+            } else if (cmd === "time") {
+                log("Current Timestamp: " + new Date().toLocaleString());
+            } else if (cmd === "clear") {
+                output.innerHTML = "[SYSTEM] TERMINAL WIPED.";
+            } else {
+                log("Command not recognized in Stark Database.");
+            }
+        }, 500);
     }
-    else if (cmd === "scan") {
-      reply("Scanning systems... All modules operational ✔");
-    }
-    else if (cmd === "status") {
-      reply("STARK CORE: ONLINE | DEFENSE: ACTIVE");
-    }
-    else if (cmd === "time") {
-      reply("Current Time: " + new Date().toLocaleTimeString());
-    }
-    else if (cmd === "clear") {
-      output.innerHTML = "JARVIS ONLINE ▌";
-    }
-    else {
-      reply("Unknown command ❌");
-    }
-  }
 });
 </script>
 
