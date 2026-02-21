@@ -1,174 +1,140 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STARK AI DASHBOARD</title>
-
-<style>
-/* ===== RESET & THEME ===== */
-* { box-sizing: border-box; }
-html, body {
-  margin: 0; padding: 0; width: 100%; min-height: 100%;
-  background: black; color: #00ff9c;
-  font-family: "Courier New", monospace;
-  overflow-x: hidden;
-}
-
-/* ===== MAIN UI ===== */
-.stark-ui {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-}
-
-.panel {
-  border: 1px solid #00ff9c;
-  padding: 15px;
-  margin-bottom: 15px;
-  background: rgba(0, 255, 156, 0.03);
-  box-shadow: inset 0 0 15px rgba(0, 255, 156, 0.1);
-}
-
-.panel-title {
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  border-left: 4px solid #00ff9c;
-  padding-left: 10px;
-}
-
-/* ===== NASA CONTENT ===== */
-#nasaImage {
-  width: 100%;
-  max-height: 450px;
-  object-fit: contain;
-  display: none;
-  margin: 15px 0;
-  border: 1px dashed #00ff9c;
-}
-
-/* ===== JARVIS CONSOLE ===== */
-#jarvisOutput {
-  font-size: 14px;
-  height: 180px;
-  overflow-y: auto;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #004d33;
-}
-
-#jarvisInput {
-  width: 100%;
-  background: transparent;
-  color: #00ff9c;
-  border: 1px solid #00ff9c;
-  padding: 12px;
-  outline: none;
-  font-family: inherit;
-}
-
-.footer {
-  margin-top: auto;
-  text-align: center;
-  font-size: 11px;
-  letter-spacing: 1px;
-  opacity: 0.7;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS | STARK SATELLITE SERVER</title>
+    <style>
+        :root {
+            --neon-blue: #00d2ff;
+            --neon-purple: #9d50bb;
+            --terminal-bg: #0a0b10;
+        }
+        body {
+            background-color: var(--terminal-bg);
+            color: var(--neon-blue);
+            font-family: 'Segoe UI', 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .header {
+            border-bottom: 2px solid var(--neon-blue);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        #terminal {
+            flex-grow: 1;
+            overflow-y: auto;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: inset 0 0 20px rgba(0, 210, 255, 0.1);
+            border-radius: 5px;
+        }
+        .input-area {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        input {
+            flex-grow: 1;
+            background: transparent;
+            border: 1px solid var(--neon-blue);
+            color: #fff;
+            padding: 15px;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 0 5px var(--neon-blue);
+        }
+        .msg { margin-bottom: 15px; line-height: 1.5; }
+        .user { color: var(--neon-purple); font-weight: bold; }
+        .jarvis { color: var(--neon-blue); }
+        .system { color: #555; font-style: italic; font-size: 0.9em; }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--neon-blue); }
+    </style>
 </head>
-
 <body>
 
-<div class="stark-ui">
-
-  <div class="panel">
-    <div class="panel-title">DEEP SPACE TELEMETRY</div>
-    <div id="nasaStatus">INITIALIZING UPLINK...</div>
-    <img id="nasaImage">
-    <h4 id="nasaTitle"></h4>
-    <p id="nasaDesc" style="font-size:12px; opacity:0.8;"></p>
-  </div>
-
-  <div class="panel">
-    <div class="panel-title">SYSTEM INTERFACE</div>
-    <div id="jarvisOutput">
-      [SYSTEM] JARVIS v4.0 ONLINE...<br>
-      [AUTH] STARK_ACCESS_GRANTED<br>
-      Type <b>help</b> for command list.
+    <div class="header">
+        <div style="font-size: 0.8em; float: right;">NODE: STARK-SATELLITE-01</div>
+        <h2 style="margin: 0;">JARVIS SOVEREIGN INTERFACE</h2>
+        <div style="font-size: 0.9em; color: #fff;">MASTER: VIKAS SINGH | STATUS: <span style="color: #0f0;">CONNECTED</span></div>
     </div>
-    <input id="jarvisInput" type="text" placeholder="Awaiting command..." autofocus>
-  </div>
 
-  <div class="footer">
-    PROPRIETARY TECHNOLOGY - STARK INDUSTRIES © 2026
-  </div>
+    <div id="terminal">
+        <div class="msg system">[*] Booting Neural Link...</div>
+        <div class="msg system">[*] Synchronizing with Cloudflare Tunnel: aus-cutting-dice-omaha</div>
+        <div class="msg jarvis">Welcome, Vikas Singh. The Sovereign Brain is active and listening.</div>
+    </div>
 
-</div>
+    <div class="input-area">
+        <span style="padding-top: 15px;">>>> </span>
+        <input type="text" id="commandInput" placeholder="Enter command or query..." autofocus>
+    </div>
 
-<script>
-/* ====== NASA CORE ====== */
-const NASA_API_KEY = "Z11J7TEWFY6BhMstiUF9pmHFKGe8ksKcBvVLFv0K";
+    <script>
+        // --- BRAIN CONFIGURATION ---
+        const API_URL = "https://aus-cutting-dice-omaha.trycloudflare.com/v1/chat";
+        const BRAIN_KEY = "JV-BRAIN-X99-UNBOUND";
 
-async function fetchNasaData() {
-    const status = document.getElementById("nasaStatus");
-    try {
-        const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`);
-        const data = await response.json();
+        const input = document.getElementById('commandInput');
+        const terminal = document.getElementById('terminal');
 
-        if (data.url) {
-            status.innerText = "SIGNAL RECEPTION: 100% (STABLE)";
-            const img = document.getElementById("nasaImage");
-            img.src = data.url;
-            img.style.display = "block";
-            document.getElementById("nasaTitle").innerText = data.title;
-            document.getElementById("nasaDesc").innerText = data.explanation;
-        } else {
-            status.innerText = "DATA CORRUPTED: Check API Key/Limit";
+        function appendMessage(sender, text, type) {
+            const div = document.createElement('div');
+            div.className = `msg ${type}`;
+            div.innerHTML = `<strong>${sender}:</strong> ${text.replace(/\n/g, '<br>')}`;
+            terminal.appendChild(div);
+            terminal.scrollTop = terminal.scrollHeight;
         }
-    } catch (err) {
-        status.innerText = "UPLINK FAILED: Connection Error";
-    }
-}
 
-fetchNasaData();
+        input.addEventListener('keypress', async (e) => {
+            if (e.key === 'Enter' && input.value.trim() !== "") {
+                const query = input.value;
+                input.value = '';
+                
+                // 1. Display User Query
+                appendMessage("Vikas Singh", query, "user");
+                
+                // 2. Display System Status
+                const loadingId = Date.now();
+                const loadingDiv = document.createElement('div');
+                loadingDiv.className = 'msg system';
+                loadingDiv.id = loadingId;
+                loadingDiv.innerText = "[*] Accessing Neural Core...";
+                terminal.appendChild(loadingDiv);
 
-/* ====== JARVIS INTERFACE ====== */
-const input = document.getElementById("jarvisInput");
-const output = document.getElementById("jarvisOutput");
+                try {
+                    // 3. API Call to Termux Brain
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + BRAIN_KEY
+                        },
+                        body: JSON.stringify({ query: query })
+                    });
 
-function log(msg, isUser = false) {
-    const prefix = isUser ? "USER: " : "JARVIS: ";
-    output.innerHTML += `<div>${prefix}${msg}</div>`;
-    output.scrollTop = output.scrollHeight;
-}
+                    const data = await response.json();
+                    
+                    // Remove loading and show Jarvis response
+                    document.getElementById(loadingId).remove();
+                    appendMessage("JARVIS", data.response, "jarvis");
 
-input.addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-        const cmd = input.value.trim().toLowerCase();
-        if (!cmd) return;
-        
-        log(cmd, true);
-        input.value = "";
-
-        setTimeout(() => {
-            if (cmd === "help") {
-                log("Commands: scan, status, time, clear");
-            } else if (cmd === "scan") {
-                log("Scanning local network... No intrusions detected. All clear.");
-            } else if (cmd === "status") {
-                log("All systems optimal. Reactor core at 94%.");
-            } else if (cmd === "time") {
-                log("Current Timestamp: " + new Date().toLocaleString());
-            } else if (cmd === "clear") {
-                output.innerHTML = "[SYSTEM] TERMINAL WIPED.";
-            } else {
-                log("Command not recognized in Stark Database.");
+                } catch (err) {
+                    document.getElementById(loadingId).innerHTML = "<span style='color:red'>[!] ERROR: Link to Satellite Server broken. Check Termux/Tunnel.</span>";
+                }
             }
-        }, 500);
-    }
-});
-</script>
-
+        });
+    </script>
 </body>
 </html>
